@@ -96,5 +96,4 @@ npm run build
 ## Notes
 
 - If the job requires more minimum experience than the applicant has, the app shows a warning but still lets the AI decide the final semantic match.
-- The app language can be switched between English and Spanish from settings.
 - The auto file name combines applicant name + job title + `CV`.
