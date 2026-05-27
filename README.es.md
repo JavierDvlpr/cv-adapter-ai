@@ -2,6 +2,10 @@
 
 CV Adapter es una app en React para adaptar un CV a una vacante, mantener el resultado editable y exportarlo a DOCX o PDF.
 
+## Demo
+
+![CV Adapter en acción](./cv-adapter-ai.gif)
+
 ## Qué hace
 
 - Adapta el CV usando 7 proveedores de IA: OpenAI, Anthropic, xAI, Google Gemini, Mistral, DeepSeek y Groq.
