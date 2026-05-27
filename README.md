@@ -24,11 +24,12 @@ CV Adapter is a React app that adapts a CV to a job description, keeps the resul
 
 ## How it works
 
-1. Paste the job description.
-2. Choose AI provider, model, output language, font, and template.
-3. Click Adapt CV.
-4. Review the editable preview.
-5. Download DOCX or PDF.
+1. Choose AI provider and model.
+2. Choose output language, font, and template.
+3. Paste the job description.
+4. Click Adapt CV.
+5. Review the editable preview.
+6. Download DOCX or PDF.
 
 ## Local data
 

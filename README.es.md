@@ -16,11 +16,12 @@ CV Adapter es una app en React para adaptar un CV a una vacante, mantener el res
 
 ## Cómo funciona
 
-1. Pega la descripción de la vacante.
-2. Elige proveedor de IA, modelo, idioma de salida, tipografía y plantilla.
-3. Pulsa Adapt CV.
-4. Revisa el preview editable.
-5. Descarga DOCX o PDF.
+1. Elige proveedor de IA y modelo.
+2. Elige idioma de salida, tipografía y plantilla.
+3. Pega la descripción de la vacante.
+4. Pulsa Adapt CV.
+5. Revisa el preview editable.
+6. Descarga DOCX o PDF.
 
 ## Datos locales
 
