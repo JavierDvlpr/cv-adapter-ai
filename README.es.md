@@ -90,5 +90,4 @@ npm run build
 ## Notas
 
 - Si la vacante pide más experiencia mínima de la que tienes, la app muestra un aviso pero deja que la IA decida el ajuste semántico final.
-- El idioma de la app se puede cambiar entre inglés y español desde configuración.
 - El nombre automático combina postulante + vacante + `CV`.
