@@ -10,7 +10,7 @@ export const cvFormats: CvFormatDefinition[] = [
   {
     id: 'harvard',
     label: 'Harvard',
-    description: 'Clásico y optimizado para lectura humana y ATS.'
+    description: 'Classic and optimized for human reading and ATS.'
   }
 ];
 

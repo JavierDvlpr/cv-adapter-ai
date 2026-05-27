@@ -94,9 +94,7 @@ export function Sidebar({
       : { linkedin: 'LinkedIn', github: 'GitHub', portfolio: 'Portfolio', email: 'Email', phone: 'Phone' }
   };
 
-  const outputLanguageOptions = isSpanish
-    ? [{ value: 'es' as const, label: 'Español', preview: 'es' }, { value: 'en' as const, label: 'Inglés', preview: 'en' }]
-    : [{ value: 'en' as const, label: 'English', preview: 'en' }, { value: 'es' as const, label: 'Spanish', preview: 'es' }];
+  const outputLanguageOptions = [{ value: 'en' as const, label: 'English', preview: 'en' }];
 
   return (
     <aside className="sidebar">

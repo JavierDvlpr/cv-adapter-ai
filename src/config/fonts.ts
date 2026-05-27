@@ -10,19 +10,19 @@ export interface CvFontDefinition {
 export const cvFonts: CvFontDefinition[] = [
   {
     id: 'serif',
-    label: 'Serif clásico',
+    label: 'Classic Serif',
     family: "'Merriweather', 'Times New Roman', serif",
     docxFamily: 'Merriweather'
   },
   {
     id: 'sans',
-    label: 'Sans moderna',
+    label: 'Modern Sans',
     family: "Roboto, Arial, sans-serif",
     docxFamily: 'Roboto'
   },
   {
     id: 'ats',
-    label: 'ATS legible',
+    label: 'ATS Readable',
     family: "Arial, Helvetica, sans-serif",
     docxFamily: 'Arial'
   }
