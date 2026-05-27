@@ -103,7 +103,7 @@ export function Sidebar({
       <div className="sidebar-header">
         <div>
           <div className="logo">
-            Adaptador <span className="logo-badge">cv</span>
+            Adapter <span className="logo-badge">cv</span>
           </div>
           <div className="logo-sub">{ui.subtitle}</div>
         </div>
