@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.DS_Store
+
+# User data (editable, ignored by git)
+src/data/data.ts
+
+# Variables o secretos locales futuros
+.env
+.env.local
+.env.*.local
