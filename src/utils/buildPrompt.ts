@@ -18,6 +18,8 @@ export function buildPrompt({ jobDesc, lang, profile, experience, projects, skil
 
   return `You are a senior HR consultant and professional CV writer with 15+ years of experience. Your task: adapt a structured semantic CV to a specific job posting with maximum relevance and precision. DO NOT invent information.
 
+Write for any candidate profile. Do not assume the input belongs to the app owner, and do not personalize the response with first-person language unless the source data explicitly requires it.
+
 ${langInstr}
 
 ATS CONSTRAINTS:
@@ -69,12 +71,18 @@ ${jobDesc}
 - Exact title matching what the company seeks (4-5 words max)
 
 ### EXPERIENCE SELECTION
-- Choose 3-4 most relevant roles based on domain, technologies, and responsibility types
-- Per role: select 3-5 most aligned bullets from responsibilities array
+- Include every role present in the source experience array. Do not omit roles.
+- Use the full source set of experiences, but vary depth by relevance.
+- For the 1-2 most relevant roles, select 3-5 aligned bullets from the responsibilities array.
+- For less relevant roles, keep only 1-2 concise bullets that still support the vacancy.
 - Use responsibility descriptions directly, reformulating slightly for fit
 - Internships: mark isPracticas = true
 - Current roles (end_date null): use present tense; finished roles: past tense
-- Reorder roles by relevance to this job (not necessarily chronological)
+- Order the experience array by semantic relevance to the vacancy first.
+- Use reverse chronological order only as a tie-breaker when two roles are equally relevant.
+- If a role explicitly matches the job's core signals (for example: requirements gathering, functional analysis, business/process communication, operational transformation, APIs, SQL, or delivery of real business solutions), it should outrank a newer but less aligned role.
+- If two roles overlap and are similarly relevant, place the one with the more recent start_date first.
+- Still prioritize the most relevant bullets within each role, but never introduce roles that are not supported by the source data.
 
 ### PROJECTS
 - Select 2-3 most relevant projects based on domain and technologies

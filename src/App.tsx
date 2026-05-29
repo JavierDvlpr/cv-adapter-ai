@@ -21,6 +21,7 @@ import {
 import type {
   CvAdaptationResult,
   EducationEntry,
+  ExperienceEntry,
   LinkKey,
   LinkState
 } from './types/cv';
@@ -32,6 +33,78 @@ const defaultLinks: LinkState = {
   email: true,
   phone: true
 };
+
+function parseExperienceDate(value: string | null) {
+  if (!value) {
+    return new Date(9999, 11, 31);
+  }
+
+  const [yearText, monthText] = value.split('-');
+  const year = Number.parseInt(yearText, 10);
+  const month = Number.parseInt(monthText, 10);
+
+  if (!Number.isFinite(year) || !Number.isFinite(month)) {
+    return new Date(9999, 11, 31);
+  }
+
+  return new Date(year, month - 1, 1);
+}
+
+function sortExperienceReverseChronological(entries: ExperienceEntry[]) {
+  return [...entries].sort((left, right) => {
+    const rightEnd = parseExperienceDate(right.end_date);
+    const leftEnd = parseExperienceDate(left.end_date);
+
+    if (rightEnd.getTime() !== leftEnd.getTime()) {
+      return rightEnd.getTime() - leftEnd.getTime();
+    }
+
+    const rightStart = parseExperienceDate(right.start_date);
+    const leftStart = parseExperienceDate(left.start_date);
+
+    if (rightStart.getTime() !== leftStart.getTime()) {
+      return rightStart.getTime() - leftStart.getTime();
+    }
+
+    return right.company.localeCompare(left.company);
+  });
+}
+
+function normalizeExperienceValue(value: string) {
+  return value.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+function sortAdaptedExperience(
+  adaptedExperience: CvAdaptationResult['experience'],
+  sourceExperience: ExperienceEntry[]
+) {
+  const orderMap = new Map<string, number>();
+
+  sourceExperience.forEach((entry, index) => {
+    orderMap.set(`${normalizeExperienceValue(entry.role)}|${normalizeExperienceValue(entry.company)}`, index);
+  });
+
+  return [...adaptedExperience].sort((left, right) => {
+    const leftKey = `${normalizeExperienceValue(left.title)}|${normalizeExperienceValue(left.company)}`;
+    const rightKey = `${normalizeExperienceValue(right.title)}|${normalizeExperienceValue(right.company)}`;
+    const leftOrder = orderMap.get(leftKey);
+    const rightOrder = orderMap.get(rightKey);
+
+    if (leftOrder !== undefined && rightOrder !== undefined && leftOrder !== rightOrder) {
+      return leftOrder - rightOrder;
+    }
+
+    if (leftOrder !== undefined) {
+      return -1;
+    }
+
+    if (rightOrder !== undefined) {
+      return 1;
+    }
+
+    return 0;
+  });
+}
 
 export function App() {
   const { settings, updateProvider, updateApiKey, updateModel, updateFont, updateFormat, updateOutputLanguage, updateSectionCase, updateAutoFileName } = useAppSettings();
@@ -110,6 +183,7 @@ export function App() {
     const trimmedJobDesc = jobDesc.trim();
     const requiredYears = extractMinimumExperienceYears(trimmedJobDesc);
     const availableYears = estimateCandidateExperienceYears(experience);
+    const orderedExperience = sortExperienceReverseChronological(experience);
 
     if (!trimmedApiKey) {
       notify('Enter your API key', 'err');
@@ -137,7 +211,7 @@ export function App() {
         jobDesc: trimmedJobDesc,
         lang: settings.outputLanguage,
         profile,
-        experience,
+        experience: orderedExperience,
         projects,
         skills,
         education: educationDraft,
@@ -169,6 +243,7 @@ export function App() {
 
       setCurrentCv({
         ...result,
+        experience: sortAdaptedExperience(result.experience, orderedExperience),
         fileName: suggestedFileName,
         outputLanguage: settings.outputLanguage,
         templateId: settings.formatId,
