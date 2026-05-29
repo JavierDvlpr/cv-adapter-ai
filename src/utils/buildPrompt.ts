@@ -95,8 +95,9 @@ ${jobDesc}
 - Format each category value as: "Skill1 · Skill2 · Skill3"
 
 ### CERTIFICATIONS
-- Order by relevance field matching job requirements
-- Include 3-4 most relevant
+- Include all certifications present in the source data.
+- Order them by relevance field matching job requirements.
+- Do not omit certifications just because they are less relevant; keep them concise if needed.
 
 ### EDUCATION ORDER
 - educationOrder: [0,1] or [1,0] based on relevance
